@@ -41,6 +41,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
         }
     ],
     "relationships": [
@@ -54,8 +58,9 @@
             "relationshipType": "many-to-one",
             "otherEntityName": "productOrder",
             "otherEntityRelationshipName": "invoice",
+            "relationshipValidateRules": "required",
             "relationshipName": "order",
-            "otherEntityField": "id"
+            "otherEntityField": "code"
         }
     ],
     "changelogDate": "20200412131900",
@@ -68,5 +73,9 @@
     "readOnly": false,
     "embedded": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": [
+        "store"
+    ],
+    "searchEngine": false,
+    "databaseType": "sql"
 }
