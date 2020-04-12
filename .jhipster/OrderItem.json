@@ -33,15 +33,17 @@
             "relationshipType": "many-to-one",
             "otherEntityName": "product",
             "otherEntityRelationshipName": "orderItem",
+            "relationshipValidateRules": "required",
             "relationshipName": "product",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "productOrder",
             "otherEntityRelationshipName": "orderItem",
+            "relationshipValidateRules": "required",
             "relationshipName": "order",
-            "otherEntityField": "id"
+            "otherEntityField": "code"
         }
     ],
     "changelogDate": "20200412131800",
@@ -54,5 +56,7 @@
     "readOnly": false,
     "embedded": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": [
+        "store"
+    ]
 }

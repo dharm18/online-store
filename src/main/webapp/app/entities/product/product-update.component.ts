@@ -28,7 +28,7 @@ export class ProductUpdateComponent implements OnInit {
     size: [null, [Validators.required]],
     image: [],
     imageContentType: [],
-    productCategory: []
+    productCategory: [null, Validators.required]
   });
 
   constructor(

@@ -2,6 +2,7 @@ package com.dharam.store.web.rest;
 
 import com.dharam.store.StoreApp;
 import com.dharam.store.domain.Product;
+import com.dharam.store.domain.ProductCategory;
 import com.dharam.store.repository.ProductRepository;
 import com.dharam.store.service.ProductService;
 
@@ -79,6 +80,16 @@ public class ProductResourceIT {
             .size(DEFAULT_SIZE)
             .image(DEFAULT_IMAGE)
             .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
+        // Add required entity
+        ProductCategory productCategory;
+        if (TestUtil.findAll(em, ProductCategory.class).isEmpty()) {
+            productCategory = ProductCategoryResourceIT.createEntity(em);
+            em.persist(productCategory);
+            em.flush();
+        } else {
+            productCategory = TestUtil.findAll(em, ProductCategory.class).get(0);
+        }
+        product.setProductCategory(productCategory);
         return product;
     }
     /**
@@ -95,6 +106,16 @@ public class ProductResourceIT {
             .size(UPDATED_SIZE)
             .image(UPDATED_IMAGE)
             .imageContentType(UPDATED_IMAGE_CONTENT_TYPE);
+        // Add required entity
+        ProductCategory productCategory;
+        if (TestUtil.findAll(em, ProductCategory.class).isEmpty()) {
+            productCategory = ProductCategoryResourceIT.createUpdatedEntity(em);
+            em.persist(productCategory);
+            em.flush();
+        } else {
+            productCategory = TestUtil.findAll(em, ProductCategory.class).get(0);
+        }
+        product.setProductCategory(productCategory);
         return product;
     }
 
