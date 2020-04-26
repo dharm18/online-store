@@ -2,6 +2,8 @@ package com.dharam.store.service;
 
 import com.dharam.store.domain.ProductOrder;
 import com.dharam.store.repository.ProductOrderRepository;
+import com.dharam.store.security.AuthoritiesConstants;
+import com.dharam.store.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +49,14 @@ public class ProductOrderService {
     @Transactional(readOnly = true)
     public Page<ProductOrder> findAll(Pageable pageable) {
         log.debug("Request to get all ProductOrders");
-        return productOrderRepository.findAll(pageable);
+        if (SecurityUtils.isCurrentUserInRole
+            (AuthoritiesConstants.ADMIN)) {
+            return productOrderRepository.findAll(pageable);
+        } else
+            return productOrderRepository.findAllByCustomerUserLogin(
+                SecurityUtils.getCurrentUserLogin().get(),
+                pageable
+            );
     }
 
     /**
@@ -59,7 +68,11 @@ public class ProductOrderService {
     @Transactional(readOnly = true)
     public Optional<ProductOrder> findOne(Long id) {
         log.debug("Request to get ProductOrder : {}", id);
-        return productOrderRepository.findById(id);
+        if (SecurityUtils.isCurrentUserInRole
+            (AuthoritiesConstants.ADMIN)) {
+            return productOrderRepository.findById(id);
+        } else
+            return productOrderRepository.findOneByIdAndCustomerUserLogin(id, SecurityUtils.getCurrentUserLogin().get());
     }
 
     /**
