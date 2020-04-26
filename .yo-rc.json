@@ -41,7 +41,9 @@
     "blueprints": [],
     "skipUserManagement": false,
     "skipClient": false,
-    "skipServer": false
+    "skipServer": false,
+    "herokuAppName": "vdharam-online-store",
+    "herokuDeployType": "jar"
   },
   "entities": ["Customer", "Invoice", "OrderItem", "Product", "ProductCategory", "ProductOrder", "Shipment"]
 }
